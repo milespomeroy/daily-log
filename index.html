@@ -1,0 +1,21 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Simple Journal</title>
+	<link rel="stylesheet" type="text/css" href="/css/style.css" media="all">
+</head>
+	
+	<body>
+		<h1>{{ date }}</h1>
+		<form action="" method="post">
+			<textarea name="content" cols="30" rows="20" autofocus></textarea>
+			<input type="submit" value="Done">
+		</form>
+		<nav><a href="">Entries</a> | <a href="">Settings</a> | 
+			<a href="#">Logout ({{ user.nickname }})</a></nav>
+			<!--
+				TODO AJAX posting action
+			-->
+	</body>
+</html>
