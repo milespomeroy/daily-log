@@ -63,6 +63,14 @@ h1 {
 	color: rgba(0,0,0,0.6);
 }
 
+a.cal {
+	opacity: 0.6;
+}
+
+a.cal:hover {
+	opacity: 1;
+}
+
 textarea {
 	width: 584px;
 	font: 1.2em "Helvetica Neue", Arial, Helvetica, Geneva, 

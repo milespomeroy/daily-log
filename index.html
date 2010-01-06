@@ -7,13 +7,23 @@
 </head>
 	
 	<body>
-		<h1>{{ date }}</h1>
-		<form action="" method="post">
+		<h1>
+			{{ date }} 
+			<a class="cal" href=""><img src="/images/cal.png" alt=""></a>
+		</h1>
+		<form action="/post" method="post">
 			<textarea name="content" cols="30" rows="20" autofocus></textarea>
+			
+			<input type="hidden" name="year" value="{{ year }}">
+			<input type="hidden" name="month" value="{{ month }}">
+			<input type="hidden" name="day" value="{{ day }}">
+			
 			<input type="submit" value="Done">
 		</form>
-		<nav><a href="">Entries</a> | <a href="">Settings</a> | 
-			<a href="#">Logout ({{ user.nickname }})</a></nav>
+		<nav>
+			<a href="">Entries</a> | 
+			<a href="{{ logout }}">Logout ({{ user.nickname }})</a>
+		</nav>
 			<!--
 				TODO AJAX posting action
 			-->
