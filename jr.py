@@ -13,6 +13,9 @@ class MainHandler(webapp.RequestHandler):
 		if user:
 			today = datetime.now(PstTzinfo())
 			theDate = today.strftime("%A, %B %e, %Y")
+			query = db.GqlQuery("""SELECT * FROM JrEntry 
+				WHERE date = :1""", today.date())
+			result = query.get()
 			
 			# path of html file
 			path = os.path.join(os.path.dirname(__file__), 'index.html')
@@ -22,8 +25,13 @@ class MainHandler(webapp.RequestHandler):
 				'year': today.year,
 				'month': today.month,
 				'day': today.day,
+				'content': '',
 				'logout': users.create_logout_url(self.request.uri)
 			}
+			
+			if result:
+				values['content'] = result.content
+			
 			self.response.out.write(template.render(path, values))
 			
 		else: # not logged in
