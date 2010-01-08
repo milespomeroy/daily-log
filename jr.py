@@ -11,11 +11,15 @@ class MainHandler(webapp.RequestHandler):
 	def get(self):
 		user = users.get_current_user() # get user
 		if user:
+			# date info
 			today = datetime.now(PstTzinfo())
 			theDate = today.strftime("%A, %B %e, %Y")
-			query = db.GqlQuery("""SELECT * FROM JrEntry 
-				WHERE date = :1""", today.date())
-			result = query.get()
+			
+			# get entry if it exists
+			gquery = db.GqlQuery("""SELECT * FROM JrEntry 
+				WHERE date = :1 AND author = :2""", 
+				today.date(), user)
+			result = gquery.get()
 			
 			# path of html file
 			path = os.path.join(os.path.dirname(__file__), 'index.html')
@@ -29,6 +33,7 @@ class MainHandler(webapp.RequestHandler):
 				'logout': users.create_logout_url(self.request.uri)
 			}
 			
+			# if there is an entry, set content to it
 			if result:
 				values['content'] = result.content
 			
@@ -40,18 +45,28 @@ class MainHandler(webapp.RequestHandler):
 	def post(self):
 		user = users.get_current_user()
 		if user:
-			entry = JrEntry()
-			
+			# date info
 			year = int(self.request.get('year'))
 			month = int(self.request.get('month'))
 			day = int(self.request.get('day'))
 			
-			entry.author = user
-			entry.content = self.request.get('content')
-			entry.date = date(year, month, day)
+			# get entry if for date if exists
+			pquery = db.GqlQuery("""SELECT * FROM JrEntry 
+				WHERE date = :1 AND author = :2""", 
+				date(year, month, day), user)
+			entry = pquery.get()
 			
-			entry.put()
-			self.get()
+			# if entry doesn't exist, create it
+			if not entry:
+				entry = JrEntry()
+				entry.author = user
+				entry.date = date(year, month, day)
+			
+			# get content for entry
+			entry.content = self.request.get('content')
+						
+			entry.put() # put into datastore
+			self.get() # redirect to get request
 					
 		else: # not logged in
 			self.redirect(users.create_login_url(self.request.uri))
