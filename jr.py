@@ -36,9 +36,7 @@ class MainHandler(webapp.RequestHandler):
 			
 		else: # not logged in
 			self.redirect(users.create_login_url(self.request.uri))
-
-
-class PostIt(webapp.RequestHandler):
+			
 	def post(self):
 		user = users.get_current_user()
 		if user:
@@ -53,6 +51,7 @@ class PostIt(webapp.RequestHandler):
 			entry.date = date(year, month, day)
 			
 			entry.put()
+			self.get()
 					
 		else: # not logged in
 			self.redirect(users.create_login_url(self.request.uri))
@@ -75,8 +74,7 @@ class PstTzinfo(tzinfo):
 
 
 def main():
-	application = webapp.WSGIApplication([('/', MainHandler),
-		('/post', PostIt)], 
+	application = webapp.WSGIApplication([('/', MainHandler)], 
 		debug=True)
 	run_wsgi_app(application)
 

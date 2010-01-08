@@ -82,28 +82,28 @@ textarea {
 	
 }
 
-textarea:focus {
+/*textarea:focus {
 	outline: none;
 	border-color: rgba(0,0,0,0.3);
 }
-
+*/
 input[type=submit] {
-	font-size: 0.8em;
-	line-height: 1.5em;
-	margin: 0;
-	padding: 0;
+	/*font-size: 0.8em;
+		line-height: 1.5em;
+		margin: 0;
+		padding: 0;
+		background: none;
+		color: rgba(0,0,0,0.3);
+		border: none;
+		outline: none;*/
 	float: right;
-	background: none;
-	color: rgba(0,0,0,0.3);
-	border: none;
-	outline: none;
 }
 
-input[type=submit]:focus, input[type=submit]:hover {
+/*input[type=submit]:focus, input[type=submit]:hover {
 	color: rgba(0,0,0,0.6);
 	text-decoration: underline;
 	cursor: pointer;
-}
+}*/
 
 nav {
 	font-size: 0.8em;
