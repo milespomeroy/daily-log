@@ -42,6 +42,8 @@ class MainHandler(webapp.RequestHandler):
 		else: # not logged in
 			self.redirect(users.create_login_url(self.request.uri))
 			
+	
+class PostEntry(webapp.RequestHandler):
 	def post(self):
 		user = users.get_current_user()
 		if user:
@@ -66,7 +68,7 @@ class MainHandler(webapp.RequestHandler):
 			entry.content = self.request.get('content')
 						
 			entry.put() # put into datastore
-			self.get() # redirect to get request
+			#self.redirect('/')
 					
 		else: # not logged in
 			self.redirect(users.create_login_url(self.request.uri))
@@ -89,7 +91,8 @@ class PstTzinfo(tzinfo):
 
 
 def main():
-	application = webapp.WSGIApplication([('/', MainHandler)], 
+	application = webapp.WSGIApplication([('/', MainHandler), 
+		('/post', PostEntry)], 
 		debug=True)
 	run_wsgi_app(application)
 

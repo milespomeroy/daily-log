@@ -4,6 +4,8 @@
 	<meta charset="UTF-8">
 	<title>Simple Journal</title>
 	<link rel="stylesheet" type="text/css" href="/css/style.css" media="all">
+	<script type="text/javascript" src="/scripts/jquery.js"></script>
+	<script type="text/javascript" src="/scripts/saveit.js"></script>
 </head>
 	
 	<body>
@@ -11,14 +13,15 @@
 			{{ date }} 
 			<a class="cal" href=""><img src="/images/cal.png" alt=""></a>
 		</h1>
-		<form action="" method="post">
+		<form action="/post" method="post">
 			<textarea name="content" cols="30" rows="20" autofocus>{{ content }}</textarea>
 			
 			<input type="hidden" name="year" value="{{ year }}">
 			<input type="hidden" name="month" value="{{ month }}">
 			<input type="hidden" name="day" value="{{ day }}">
 			
-			<input type="submit" value="Done">
+			<input id="button" type="submit" value="Done">
+			<span id="status">saved</span>
 		</form>
 		<nav>
 			<a href="">Entries</a> | 

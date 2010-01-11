@@ -82,11 +82,10 @@ textarea {
 	
 }
 
-/*textarea:focus {
+textarea:focus {
 	outline: none;
-	border-color: rgba(0,0,0,0.3);
 }
-*/
+
 input[type=submit] {
 	/*font-size: 0.8em;
 		line-height: 1.5em;
