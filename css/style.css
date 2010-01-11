@@ -86,15 +86,15 @@ textarea:focus {
 	outline: none;
 }
 
-input[type=submit] {
-	/*font-size: 0.8em;
-		line-height: 1.5em;
-		margin: 0;
-		padding: 0;
-		background: none;
-		color: rgba(0,0,0,0.3);
-		border: none;
-		outline: none;*/
+#status {
+	font-size: 0.8em;
+	line-height: 1.5em;
+	margin: 0;
+	padding: 0;
+	background: none;
+	color: rgba(0,0,0,0.3);
+	border: none;
+	outline: none;
 	float: right;
 }
 

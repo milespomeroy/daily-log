@@ -1,21 +1,21 @@
 $(document).ready(function(){
+	// set the typed global variable
 	typed=0;
-	posted=0;
 	
 	$('textarea').keyup(function() {
+		// increment typed to show that typing is occuring
 		typed++;
-		$('#status').html('Typed: '+typed+' Posted: '+posted);
-	});
-	
-	$('textarea').keyup(function() {
-		$('#button').val('Saving...');
+		// saving is happening
+		$('#status').html('Saving...');
+		
+		// wait for 2 secs then see if there has been more typing.
+		// if not, post the entry form. And mark it saved.
+		// if so, subtract your number from the typed variable.
 		setTimeout(function() {
-			// $.post("/post", $("textarea").serialize());
-			// 			$('#status').html('saved');
 			if (typed==1)
 			{
-				posted++;
-				$('#button').val('Saved');
+				$.post("/post", $("#entry").serialize());
+				$('#status').html('Saved');
 			}
 			typed--;
 		}, 2000);
