@@ -2,7 +2,7 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title>Simple Journal</title>
+	<title>Daily Log</title>
 	<link rel="stylesheet" type="text/css" href="/css/style.css" media="all">
 	<script type="text/javascript" src="/scripts/jquery.js"></script>
 	<script type="text/javascript" src="/scripts/saveit.js"></script>
@@ -13,8 +13,10 @@
 			{{ date }} 
 			<a class="cal" href=""><img src="/images/cal.png" alt=""></a>
 		</h1>
+		
 		<form id="entry" action="/post" method="post">
-			<textarea name="content" cols="30" rows="20" autofocus>{{ content }}</textarea>
+			<textarea name="content" cols="30" rows="20" 
+				autofocus>{{ content }}</textarea>
 			
 			<input type="hidden" name="year" value="{{ year }}">
 			<input type="hidden" name="month" value="{{ month }}">
@@ -26,12 +28,11 @@
 				</noscript>
 			</div>
 		</form>
+		
 		<nav>
-			<a href="">Entries</a> | 
+			<a href="/about">Daily Log</a> | 
 			<a href="{{ logout }}">Logout ({{ user.nickname }})</a>
 		</nav>
-			<!--
-				TODO AJAX posting action
-			-->
+
 	</body>
 </html>

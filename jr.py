@@ -73,6 +73,23 @@ class PostEntry(webapp.RequestHandler):
 		else: # not logged in
 			self.redirect(users.create_login_url(self.request.uri))
 			
+			
+class AboutHandler(webapp.RequestHandler):
+	def get(self):
+		user = users.get_current_user() # get user
+		if user:
+			# path of html file
+			path = os.path.join(os.path.dirname(__file__), 'about.html')
+			values = {
+				'user': user,
+				'logout': users.create_logout_url(self.request.uri)
+			}
+			
+			self.response.out.write(template.render(path, values))
+			
+		else: # not logged in
+			self.redirect(users.create_login_url(self.request.uri))
+
 
 class JrEntry(db.Model):
 	author = db.UserProperty()
@@ -92,7 +109,7 @@ class PstTzinfo(tzinfo):
 
 def main():
 	application = webapp.WSGIApplication([('/', MainHandler), 
-		('/post', PostEntry)], 
+		('/post', PostEntry), ('/about', AboutHandler)], 
 		debug=True)
 	run_wsgi_app(application)
 
