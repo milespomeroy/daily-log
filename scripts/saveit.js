@@ -1,6 +1,6 @@
 $(document).ready(function(){
 	// set the typed global variable
-	typed=0;
+	var typed = 0;
 	
 	$('textarea').keyup(function() {
 		// increment typed to show that typing is occuring
@@ -12,9 +12,16 @@ $(document).ready(function(){
 		// if not, post the entry form. And mark it saved.
 		// if so, subtract your number from the typed variable.
 		setTimeout(function() {
-			if (typed==1)
+			if (typed === 1)
 			{
-				$.post("/post", $("#entry").serialize());
+				// post individual elements instead of the whole form to 
+				// bypass Safari content not saved dialog.
+				$.post("/post", {
+					content: $("textarea").val(),
+					year: $("input[name='year']").val(),
+					month: $("input[name='month']").val(),
+					day: $("input[name='day']").val()	
+					});
 				$('#status').html('Saved');
 			}
 			typed--;

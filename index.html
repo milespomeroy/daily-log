@@ -4,7 +4,7 @@
 	<meta charset="UTF-8">
 	<title>Daily Log</title>
 	<link rel="stylesheet" type="text/css" href="/css/style.css" media="all">
-	<script type="text/javascript" src="/scripts/jquery.js"></script>
+	<script type="text/javascript" src="/scripts/jquery-1.4rc1.js"></script>
 	<script type="text/javascript" src="/scripts/saveit.js"></script>
 </head>
 	
@@ -14,7 +14,10 @@
 			<a class="cal" href=""><img src="/images/cal.png" alt=""></a>
 		</h1>
 		
-		<form id="entry" action="/post" method="post">
+		<!-- Get rid of the form tags if JS is enabled. Bypasses Safari 
+		     complaining that content hasn't been saved -->
+		<noscript><form id="entry" action="/post" method="post"></noscript>
+			
 			<textarea name="content" cols="30" rows="20" 
 				autofocus>{{ content }}</textarea>
 			
@@ -27,7 +30,8 @@
 					<input id="button" type="submit" value="Done">
 				</noscript>
 			</div>
-		</form>
+			
+		<noscript></form></noscript>
 		
 		<nav>
 			<a href="/about">Daily Log</a> | 

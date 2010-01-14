@@ -1,4 +1,4 @@
-application: simple-journal
+application: daily-log
 version: 1
 runtime: python
 api_version: 1
