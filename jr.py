@@ -91,6 +91,25 @@ class AboutHandler(webapp.RequestHandler):
 			self.redirect(users.create_login_url(self.request.uri))
 
 
+class GetHandler(webapp.RequestHandler):
+	def get(self):
+		user = users.get_current_user()
+		if user:
+			# date info
+			year = int(self.request.get('year'))
+			month = int(self.request.get('month'))
+			day = int(self.request.get('day'))
+		
+			# get entry if for date if exists
+			query = db.GqlQuery("""SELECT * FROM JrEntry 
+				WHERE date = :1 AND author = :2""", 
+				date(year, month, day), user)
+			entry = query.get()
+			
+			if entry:
+				self.response.out.write(entry.content)
+
+
 class JrEntry(db.Model):
 	author = db.UserProperty()
 	content = db.TextProperty()
@@ -109,7 +128,8 @@ class PstTzinfo(tzinfo):
 
 def main():
 	application = webapp.WSGIApplication([('/', MainHandler), 
-		('/post', PostEntry), ('/about', AboutHandler)], 
+		('/post', PostEntry), ('/get', GetHandler), 
+		('/about', AboutHandler)], 
 		debug=True)
 	run_wsgi_app(application)
 

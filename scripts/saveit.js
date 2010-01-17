@@ -5,7 +5,27 @@ $(document).ready(function(){
 		$("input[name='year']").val('2012');
 		$("input[name='month']").val('12');
 		$("input[name='day']").val('12');
-		$("textarea").val('The Future is Here.');
+		
+		// get the content of the entry for that date
+		$("textarea").val(function(){
+			var val = null;
+			
+			$.ajax({
+				'async': false,
+				'global': false,
+				'url': '/get',
+				'data': ({
+					year: '2012',
+					month: '12',
+					day: '12'
+					}),
+				'success': function(data){
+					val = data;
+				}
+			});
+			
+			return val;
+		});
 	});
 	
 	// set the typed global variable
