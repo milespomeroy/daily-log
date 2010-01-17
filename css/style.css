@@ -63,12 +63,13 @@ h1 {
 	color: rgba(0,0,0,0.6);
 }
 
-a.cal {
+.cal {
 	opacity: 0.6;
 }
 
-a.cal:hover {
+.cal:hover {
 	opacity: 1;
+	cursor: pointer;
 }
 
 textarea {

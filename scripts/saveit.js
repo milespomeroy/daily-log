@@ -1,4 +1,13 @@
 $(document).ready(function(){
+	
+	$('.cal').click(function(){
+		$('.date').text('Friday, December 12, 2012');
+		$("input[name='year']").val('2012');
+		$("input[name='month']").val('12');
+		$("input[name='day']").val('12');
+		$("textarea").val('The Future is Here.');
+	});
+	
 	// set the typed global variable
 	var typed = 0;
 	
