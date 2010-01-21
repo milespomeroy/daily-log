@@ -1,5 +1,5 @@
 application: daily-log
-version: 1
+version: 1-0-b1
 runtime: python
 api_version: 1
 

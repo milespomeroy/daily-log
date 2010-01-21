@@ -1,33 +1,35 @@
 $(document).ready(function(){
 	
-	$('.cal').click(function(){
-		$('.date').text('Friday, December 12, 2012');
-		$("input[name='year']").val('2012');
-		$("input[name='month']").val('12');
-		$("input[name='day']").val('12');
+// Change date using the calendar	
+	$('.cal').date_input({ 
+		changeEntry: function(year, month, day) {
+			$("input[name='year']").val(year);
+			$("input[name='month']").val(month);
+			$("input[name='day']").val(day);
 		
-		// get the content of the entry for that date
-		$("textarea").val(function(){
-			var val = null;
-			
-			$.ajax({
-				'async': false,
-				'global': false,
-				'url': '/get',
-				'data': ({
-					year: '2012',
-					month: '12',
-					day: '12'
-					}),
-				'success': function(data){
-					val = data;
-				}
+			$("textarea").val(function(){
+				var val = null;
+
+				$.ajax({
+					'async': false,
+					'global': false,
+					'url': '/get',
+					'data': ({
+						year: year,
+						month: month,
+						day: day
+						}),
+					'success': function(data){
+						val = data;
+					}
+				});
+
+				return val;
 			});
-			
-			return val;
-		});
+		} 
 	});
-	
+
+// Save with AJAX
 	// set the typed global variable
 	var typed = 0;
 	
