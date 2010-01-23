@@ -30,9 +30,9 @@ DateInput.prototype = {
     $(".next", monthNav).click(this.bindToObj(function() { this.moveMonthBy(1); }));
     
     var yearNav = $('<p class="year_nav">' +
-      '<span class="button prev" title="[Ctrl+Page-Up]">&#171;</span>' +
+      '<span class="button prev" title="[Ctrl+Page-Up]">&lsaquo;</span>' +
       ' <span class="year_name"></span> ' +
-      '<span class="button next" title="[Ctrl+Page-Down]">&#187;</span>' +
+      '<span class="button next" title="[Ctrl+Page-Down]">&rsaquo;</span>' +
       '</p>');
     this.yearNameSpan = $(".year_name", yearNav);
     $(".prev", yearNav).click(this.bindToObj(function() { this.moveMonthBy(-12); }));
