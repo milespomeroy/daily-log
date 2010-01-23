@@ -93,7 +93,7 @@
 	background: rgba(255,255,255,0.6);
 }
 .date_selector td.today {
-	background: #000;
+	background: #eaebec;
 }
 .date_selector td.unselected_month {
 	color: #ccc;

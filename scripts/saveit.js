@@ -52,8 +52,9 @@ $(document).ready(function(){
 					year: $("input[name='year']").val(),
 					month: $("input[name='month']").val(),
 					day: $("input[name='day']").val()	
+					}, function(){
+						$('#status').html('Saved');
 					});
-				$('#status').html('Saved');
 			}
 			typed--;
 		}, 2000);
