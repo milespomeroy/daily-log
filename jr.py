@@ -88,7 +88,7 @@ class AboutHandler(webapp.RequestHandler):
 			self.response.out.write(template.render(path, values))
 			
 		else: # not logged in
-			self.redirect(users.create_login_url(self.request.uri))
+			self.redirect(users.create_login_url('/'))
 
 
 class GetHandler(webapp.RequestHandler):
@@ -108,6 +108,24 @@ class GetHandler(webapp.RequestHandler):
 			
 			if entry:
 				self.response.out.write(entry.content)
+				
+				
+# Download user's journal entries as a single text file
+class Downloader(webapp.RequestHandler):
+	def get(self):
+		user = users.get_current_user()
+		if user:
+			entries = db.GqlQuery("""SELECT * FROM JrEntry 
+				WHERE author = :1 ORDER BY date""", user)
+			
+			for entry in entries:
+				if len(entry.content) > 0:
+					rightNow = datetime.now() # datetime for filename
+					self.response.headers['Content-Type'] = 'application/octet-stream'
+					self.response.headers['Content-disposition'] = "attachment; filename=%s.txt" % rightNow
+					theDate = entry.date.strftime("%A, %B %e, %Y")
+					self.response.out.write("\n" + theDate + "\n-----\n\n" + 
+						entry.content + "\n\n============================\n")			
 
 
 class JrEntry(db.Model):
@@ -128,7 +146,7 @@ class PstTzinfo(tzinfo):
 
 def main():
 	application = webapp.WSGIApplication([('/', MainHandler), 
-		('/post', PostEntry), ('/get', GetHandler), 
+		('/post', PostEntry), ('/get', GetHandler), ('/download', Downloader),
 		('/about', AboutHandler)], 
 		debug=True)
 	run_wsgi_app(application)
