@@ -68,7 +68,6 @@ class PostEntry(webapp.RequestHandler):
 			entry.content = self.request.get('content')
 						
 			entry.put() # put into datastore
-			#self.redirect('/')
 					
 		else: # not logged in
 			self.redirect(users.create_login_url(self.request.uri))
@@ -131,7 +130,10 @@ class Downloader(webapp.RequestHandler):
 class JrEntry(db.Model):
 	author = db.UserProperty()
 	content = db.TextProperty()
+	# date of the journal entry, no time
 	date = db.DateProperty()
+	# last modified datetime
+	updated = db.DateTimeProperty(auto_now=True)
 
 
 # tzinfo class for Pacific Standard Time, from timezones.appspot.com
